@@ -3,6 +3,9 @@ export default class Cell{
         this._index = index;
     }
     cell(content, table){
+        // const $container = document.createElement('div');
+        // $container.classList.add('game-place');
+        // $container.appendChild(table);
         const $tr = document.createElement('tr');
         const $td = document.createElement('td');
         const matrix = [];

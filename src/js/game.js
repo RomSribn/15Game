@@ -3,7 +3,7 @@ import Cell from "./cell";
 export default class Game {
     constructor(cell){
         this.$table = document.querySelector('table');
-        this.$cell = cell;;
+        this.$cell = cell;
         this.move = {
             up: -4,
             left: -1,
@@ -12,7 +12,7 @@ export default class Game {
         };
         this.hole = 15;
         this.currentShuffleBoard;
-        window.addEventListener("keydown", this.handlePut)
+        window.addEventListener("keydown", this.handlePut.bind(this))
     }
     start(){
         this.randomGenerate();
@@ -31,10 +31,14 @@ export default class Game {
     }
     go(move) {
         const index = this.hole + move;
+        console.log(this.currentShuffleBoard)
+        console.log(this.currentShuffleBoard[index])
         if (!this.currentShuffleBoard[index]) return false;
         // не всякое движение вправо-влево допустимо
-        if (move === this.move.left || move === this.move.right)
+        if (move === this.move.left || move === this.move.right){
             if (Math.floor(this.hole/4) !== Math.floor(index/4)) return false;
+        }
+        console.log('sdf')
         this.swap(index, this.hole);
         this.hole = index;
         return true;
@@ -50,7 +54,7 @@ export default class Game {
         shuffleArray.push(tile);
     }
 
-    this.currentShuffleBoard = shuffleArray.concat(' ').map((_, i, a) => a.slice(i * 4, i * 4 + 4)).filter((el) => el.length);
+    this.currentShuffleBoard = shuffleArray.concat(' ');
     }
 
     handlePut(e){
@@ -66,7 +70,7 @@ export default class Game {
 
     createCell(){
 
-        this.$cell.cell(this.currentShuffleBoard, this.$table);
+        this.$cell.cell(this.currentShuffleBoard.map((_, i, a) => a.slice(i * 4, i * 4 + 4)).filter((el) => el.length), this.$table);
 
     }
 }
