@@ -13,7 +13,8 @@ export default class Game {
         this.hole = 15;
         this.currentShuffleBoard;
         this.matrix = this.$cell.cell();
-        window.addEventListener("keydown", this.handlePut.bind(this))
+        window.addEventListener("keydown", this.handlePut.bind(this));
+        this.$table.addEventListener('click', this.handleClick.bind(this));
     }
     start(){
         this.currentShuffleBoard = this.randomGenerate();
@@ -69,6 +70,30 @@ export default class Game {
             this.createCell(); if (this.isCompleted()) {
                 this.$table.style.backgroundColor = "gold";
                 window.removeEventListener('keydown', arguments.callee); }
+        }
+    }
+    handleClick(e){
+
+        let y = e.target.cellIndex;
+        let x = e.target.parentNode.rowIndex;
+        // console.log(this.$table.rows[x-1].cells[y].innerText);
+        console.log(x + ' ' + y)
+        // console.log(e.target.cellIndex + ' ' + e.target.parentNode.rowIndex)
+        if(!y || !this.$table.rows[x+1].cells[y].innerText){
+            this.moving(this.move.up);
+            this.createCell()
+        }
+        if(!y || !this.$table.rows[x-1].cells[y].innerText ){
+            this.moving(this.move.down);
+            this.createCell()
+        }
+        if(!this.$table.rows[x].cells[y+1].innerText){
+            this.moving(this.move.left);
+            this.createCell()
+        }
+        if(!this.$table.rows[x].cells[y-1].innerText){
+            this.moving(this.move.right);
+            this.createCell()
         }
     }
     createCell(){
