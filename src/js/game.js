@@ -12,10 +12,13 @@ export default class Game {
         };
         this.hole = 15;
         this.currentShuffleBoard;
+        this.matrix = this.$cell.cell();
         window.addEventListener("keydown", this.handlePut.bind(this))
     }
     start(){
-        this.randomGenerate();
+        this.currentShuffleBoard = this.randomGenerate();
+        this.matrix.forEach(i => this.$table.appendChild(i));
+
         this.createCell();
         // this.clickEvents();
     }
@@ -29,7 +32,7 @@ export default class Game {
     isCompleted(){
         return !this.currentShuffleBoard.some(function(item, i) { return item > 0 && item-1 !== i; });
     }
-    go(move) {
+    moving(move) {
         const index = this.hole + move;
         console.log(this.currentShuffleBoard)
         console.log(this.currentShuffleBoard[index])
@@ -55,10 +58,11 @@ export default class Game {
     }
 
     this.currentShuffleBoard = shuffleArray.concat(' ');
+    return shuffleArray.concat(' ');
     }
 
     handlePut(e){
-        if (this.go(this.move[
+        if (this.moving(this.move[
             {39: 'left', 37: 'right', 40: 'up', 38: 'down'}[e.keyCode]
             ]))
         {
@@ -67,10 +71,16 @@ export default class Game {
                 window.removeEventListener('keydown', arguments.callee); }
         }
     }
-
     createCell(){
-
-        this.$cell.cell(this.currentShuffleBoard.map((_, i, a) => a.slice(i * 4, i * 4 + 4)).filter((el) => el.length), this.$table);
+        for (let i = 0; i < 4; i += 1) {
+            for (let j = 0; j < 4; j += 1) {
+                this.matrix[i][j].innerText = this.currentShuffleBoard.map((_, i, a) => a.slice(i * 4, i * 4 + 4)).filter((el) => el.length)[i][j]
+            }
+        }
+    }
+    123(){
+            // console.log(this.$cell.cell())
+        // this.$cell.cell(this.currentShuffleBoard.map((_, i, a) => a.slice(i * 4, i * 4 + 4)).filter((el) => el.length), this.$table);
 
     }
 }
