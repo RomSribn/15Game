@@ -78,9 +78,5 @@ export default class Game {
             }
         }
     }
-    123(){
-            // console.log(this.$cell.cell())
-        // this.$cell.cell(this.currentShuffleBoard.map((_, i, a) => a.slice(i * 4, i * 4 + 4)).filter((el) => el.length), this.$table);
 
-    }
 }
