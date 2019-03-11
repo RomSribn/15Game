@@ -35,14 +35,14 @@ export default class Game {
     }
     moving(move) {
         const index = this.hole + move;
-        console.log(this.currentShuffleBoard)
-        console.log(this.currentShuffleBoard[index])
+        // console.log(this.currentShuffleBoard)
+        // console.log(this.currentShuffleBoard[index])
         if (!this.currentShuffleBoard[index]) return false;
         // не всякое движение вправо-влево допустимо
         if (move === this.move.left || move === this.move.right){
             if (Math.floor(this.hole/4) !== Math.floor(index/4)) return false;
         }
-        console.log('sdf')
+        console.log('sdf');
         this.swap(index, this.hole);
         this.hole = index;
         return true;
@@ -72,29 +72,37 @@ export default class Game {
                 window.removeEventListener('keydown', arguments.callee); }
         }
     }
+    checkForClick(x, y){
+        if((x+1) < 4 && !this.$table.rows[x+1].cells[y].innerText){
+            this.moving(this.move.up);
+            this.createCell();
+        }
+        if((x-1) >= 0 && !this.$table.rows[x-1].cells[y].innerText ){
+            this.moving(this.move.down);
+            this.createCell()
+        }
+        if((y+1) < 4 && !this.$table.rows[x].cells[y+1].innerText){
+            this.moving(this.move.left);
+            this.createCell()
+        }
+        if((y-1) >= 0 && !this.$table.rows[x].cells[y-1].innerText){
+            this.moving(this.move.right);
+            this.createCell()
+        }
+    }
     handleClick(e){
 
         let y = e.target.cellIndex;
         let x = e.target.parentNode.rowIndex;
-        // console.log(this.$table.rows[x-1].cells[y].innerText);
-        console.log(x + ' ' + y)
+        console.log(this.$table.rows[x].cells[y].innerText);
+        console.log(x + ' ' + y);
+        console.log(this.$table.rows[x].cells[y]);
         // console.log(e.target.cellIndex + ' ' + e.target.parentNode.rowIndex)
-        if(!y || !this.$table.rows[x+1].cells[y].innerText){
-            this.moving(this.move.up);
-            this.createCell()
-        }
-        if(!y || !this.$table.rows[x-1].cells[y].innerText ){
-            this.moving(this.move.down);
-            this.createCell()
-        }
-        if(!this.$table.rows[x].cells[y+1].innerText){
-            this.moving(this.move.left);
-            this.createCell()
-        }
-        if(!this.$table.rows[x].cells[y-1].innerText){
-            this.moving(this.move.right);
-            this.createCell()
-        }
+        // switch(x, y){
+        //     case (x+1) < 4 && !this.$table.rows[x+1].cells[y].innerText: {}
+        // }
+        this.checkForClick(x, y);
+
     }
     createCell(){
         for (let i = 0; i < 4; i += 1) {
