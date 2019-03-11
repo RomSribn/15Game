@@ -11,20 +11,20 @@ export default class Game {
             right: 1
         };
         this.hole = 15;
-        this.currentShuffleBoard;
+        this.currentShuffleBoard = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, ' '];
         this.matrix = this.$cell.cell();
         window.addEventListener("keydown", this.handlePut.bind(this));
         this.$table.addEventListener('click', this.handleClick.bind(this));
         this.$startButton.addEventListener('click', this.handleStart.bind(this))
     }
     start(){
-        this.currentShuffleBoard = this.randomGenerate();
         this.matrix.forEach(i => this.$table.appendChild(i));
 
         this.createCell();
-        // this.clickEvents();
     }
     handleStart(){
+        this.$table.style.backgroundColor = 'transparent';
+        this.currentShuffleBoard = this.randomGenerate();
         this.start()
     }
     swap(i1, i2) {
@@ -36,6 +36,13 @@ export default class Game {
     }
     isCompleted(){
         return !this.currentShuffleBoard.some(function(item, i) { return item > 0 && item-1 !== i; });
+    }
+    completeMessage(callback){
+        if (callback) {
+            this.$table.style.backgroundColor = "gold";
+            window.removeEventListener('keydown', this.handlePut.bind(this));
+            this.$table.removeEventListener('click', this.handleClick.bind(this));
+        }
     }
     moving(move) {
         const index = this.hole + move;
@@ -55,7 +62,6 @@ export default class Game {
         let res = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
         let shuffleArray = [];
     while (res.length) {
-        // console.log(res)
         const randomIndex = Math.round(Math.random() * (res.length - 1));
         const tile = res.splice(randomIndex, 1)[0];
 
@@ -71,27 +77,31 @@ export default class Game {
             {39: 'left', 37: 'right', 40: 'up', 38: 'down'}[e.keyCode]
             ]))
         {
-            this.createCell(); if (this.isCompleted()) {
-                this.$table.style.backgroundColor = "gold";
-                window.removeEventListener('keydown', arguments.callee); }
+            this.createCell();
+            this.completeMessage(this.isCompleted());
         }
     }
     checkForClick(x, y){
         if((x+1) < 4 && !this.$table.rows[x+1].cells[y].innerText){
             this.moving(this.move.up);
             this.createCell();
+            this.completeMessage(this.isCompleted());
+
         }
         if((x-1) >= 0 && !this.$table.rows[x-1].cells[y].innerText ){
             this.moving(this.move.down);
-            this.createCell()
+            this.createCell();
+            this.completeMessage(this.isCompleted());
         }
         if((y+1) < 4 && !this.$table.rows[x].cells[y+1].innerText){
             this.moving(this.move.left);
-            this.createCell()
+            this.createCell();
+            this.completeMessage(this.isCompleted());
         }
         if((y-1) >= 0 && !this.$table.rows[x].cells[y-1].innerText){
             this.moving(this.move.right);
-            this.createCell()
+            this.createCell();
+            this.completeMessage(this.isCompleted());
         }
     }
     handleClick(e){
@@ -101,10 +111,7 @@ export default class Game {
         console.log(this.$table.rows[x].cells[y].innerText);
         console.log(x + ' ' + y);
         console.log(this.$table.rows[x].cells[y]);
-        // console.log(e.target.cellIndex + ' ' + e.target.parentNode.rowIndex)
-        // switch(x, y){
-        //     case (x+1) < 4 && !this.$table.rows[x+1].cells[y].innerText: {}
-        // }
+
         this.checkForClick(x, y);
 
     }

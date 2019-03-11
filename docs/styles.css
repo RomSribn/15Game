@@ -57,7 +57,14 @@ table {
 #start-button:hover{
     background-color: #fff;
     color: #DAE0F2;
-    transition: 500ms;
+    transition: .5s;
+}
+
+.modal{
+    z-index: 999;
+}
+.modal .outer{
+    background-color: gray;
 }
 
 
