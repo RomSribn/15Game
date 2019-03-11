@@ -1,7 +1,7 @@
-import Cell from "./cell";
 
 export default class Game {
     constructor(cell){
+        this.$startButton = document.querySelector('#start-button');
         this.$table = document.querySelector('table');
         this.$cell = cell;
         this.move = {
@@ -15,6 +15,7 @@ export default class Game {
         this.matrix = this.$cell.cell();
         window.addEventListener("keydown", this.handlePut.bind(this));
         this.$table.addEventListener('click', this.handleClick.bind(this));
+        this.$startButton.addEventListener('click', this.handleStart.bind(this))
     }
     start(){
         this.currentShuffleBoard = this.randomGenerate();
@@ -22,6 +23,9 @@ export default class Game {
 
         this.createCell();
         // this.clickEvents();
+    }
+    handleStart(){
+        this.start()
     }
     swap(i1, i2) {
         let t =   this.currentShuffleBoard[i1];
