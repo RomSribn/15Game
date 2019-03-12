@@ -12,5 +12,5 @@ https://romsribn.github.io/15Game-team-intern/
 * CSS
 * Git
 #
-###### Patterns
+###### Pattern
 * mvc
