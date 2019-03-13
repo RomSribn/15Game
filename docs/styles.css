@@ -10,6 +10,31 @@ html, body {
     font-size: 20pt;
     color: #f1f1f1;
 }
+<<<<<<< HEAD
+=======
+/*.game-place{*/
+    /*margin: auto;*/
+    /*display: grid;*/
+    /*grid-template-columns: 100px 100px 100px 100px;*/
+    /*grid-gap: 1px;*/
+    /*border: 1px solid #333333;*/
+    /*border-radius: 5px;*/
+    /*width: 403px;*/
+    /*!*text-align: center;*!*/
+/*}*/
+/*!*.game-place div{*!*/
+    /*!*display: flex;*!*/
+/*!*}*!*/
+/*.game-place button{*/
+    /*width: 100px;*/
+    /*height: 100px;*/
+    /*font-size: 20pt;*/
+    /*border: 1px solid #333333;*/
+    /*dorder-radius: 5px;*/
+    /*background-color: #e3e3e3;*/
+
+/*}*/
+>>>>>>> cc2b90e... mooving-with-bugs
 td{
     width: 100px;
     height: 100px;

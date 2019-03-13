@@ -11,16 +11,13 @@ export default class Game {
             right: 1
         };
         this.hole = 15;
-<<<<<<< HEAD
         this.currentShuffleBoard = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, ' '];
         this.matrix = this.$cell.cell();
         window.addEventListener("keydown", this.handlePut.bind(this));
         this.$table.addEventListener('click', this.handleClick.bind(this));
         this.$startButton.addEventListener('click', this.handleStart.bind(this))
-=======
         this.currentShuffleBoard;
         window.addEventListener("keydown", this.handlePut.bind(this))
->>>>>>> cc2b90e... mooving-with-bugs
     }
     start(){
         this.matrix.forEach(i => this.$table.appendChild(i));
@@ -51,23 +48,11 @@ export default class Game {
     }
     moving(move) {
         const index = this.hole + move;
-<<<<<<< HEAD
-        // console.log(this.currentShuffleBoard)
-        // console.log(this.currentShuffleBoard[index])
-=======
-        console.log(this.currentShuffleBoard)
-        console.log(this.currentShuffleBoard[index])
->>>>>>> cc2b90e... mooving-with-bugs
         if (!this.currentShuffleBoard[index]) return false;
-        // не всякое движение вправо-влево допустимо
+        // check for edges place
         if (move === this.move.left || move === this.move.right){
             if (Math.floor(this.hole/4) !== Math.floor(index/4)) return false;
         }
-<<<<<<< HEAD
-        console.log('sdf');
-=======
-        console.log('sdf')
->>>>>>> cc2b90e... mooving-with-bugs
         this.swap(index, this.hole);
         this.hole = index;
         return true;
@@ -83,10 +68,7 @@ export default class Game {
     }
 
     this.currentShuffleBoard = shuffleArray.concat(' ');
-<<<<<<< HEAD
     return shuffleArray.concat(' ');
-=======
->>>>>>> cc2b90e... mooving-with-bugs
     }
 
     handlePut(e){
@@ -129,11 +111,8 @@ export default class Game {
         console.log(x + ' ' + y);
         console.log(this.$table.rows[x].cells[y]);
 
-<<<<<<< HEAD
         this.checkForClick(x, y);
-=======
         this.$cell.cell(this.currentShuffleBoard.map((_, i, a) => a.slice(i * 4, i * 4 + 4)).filter((el) => el.length), this.$table);
->>>>>>> cc2b90e... mooving-with-bugs
 
     }
     createCell(){
