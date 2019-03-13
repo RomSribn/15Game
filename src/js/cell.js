@@ -6,12 +6,11 @@ export default class Cell{
     cell(){
 
         const $table = document.createElement('div');
-=======
+
     cell(content, table){
         // const $container = document.createElement('div');
         // $container.classList.add('game-place');
         // $container.appendChild(table);
->>>>>>> cc2b90e... mooving-with-bugs
         const $tr = document.createElement('tr');
         const $td = document.createElement('td');
         const matrix = [];
