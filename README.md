@@ -1,7 +1,7 @@
 **15 Game**
 #
 ###### **Demo**
-https://romsribn.github.io/15Game-team-intern/
+https://romsribn.github.io/15Game/
 #
 ###### Technologies
 * ES6
